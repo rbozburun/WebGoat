@@ -24,6 +24,6 @@ steps:
     fortifyServerName: 'Fortify-SSC'
     fortifyApplicationIdentifierType: 'byId'
     fortifyApplicationVersionId: '10000'
-    fortifyBuildFailureCriteria: '[fortify priority order]:critical'
+    fortifyBuildFailureCriteria: '[fortify priority order]:critical or [fortify priority order]:high'
     taskResultForBuildFailureCriteria: 'FAIL'
 
