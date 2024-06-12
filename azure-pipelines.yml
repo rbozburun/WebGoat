@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool: Default
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+  
+- task: FortifySCA@7
+  inputs:
+    licenseFile: 'C:\fortify-home\fortify.license'
+    applicationType: 'java'
+    buildSourceVersion: '17'
+    fortifyBuildId: 'WebGoat4SCSAST'
+    scaVerbose: true
+    scaDebug: true
+    fortifyScanType: 'LocalScan'
+    runFortifyUpload: true
+    fortifyServerName: 'Fortify-SSC'
+    fortifyApplicationIdentifierType: 'byId'
+    fortifyApplicationVersionId: '10000'
+    fortifyBuildFailureCriteria: '[fortify priority order]:critical'
+    taskResultForBuildFailureCriteria: 'FAIL'
+
