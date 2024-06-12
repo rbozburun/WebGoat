@@ -14,7 +14,7 @@ steps:
   
 - task: FortifySCA@7
   inputs:
-    licenseFile: 'C:\fortify-home\fortify.license'
+    licenseFile: 'C:\Program Files\Fortify\Fortify_SCA_23.2.0\fortify.license'
     applicationType: 'java'
     buildSourceVersion: '17'
     fortifyBuildId: 'WebGoat4SCSAST'
