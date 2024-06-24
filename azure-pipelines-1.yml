@@ -11,7 +11,6 @@ pool: Default
 steps:
 - task: FortifyScanCentralSAST@7
   inputs:
-    scanCentralCtrlUrl: 'https://fortify.cw:4443/scancentral-ctrl'
     scanCentralClientToken: '$(ScanCentral.ClientToken)'
     sscUrl: 'https://fortify.cw:8443/ssc/'
     sscCiToken: '$(ScanCentral.SscCiToken)'
