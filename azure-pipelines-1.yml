@@ -8,7 +8,17 @@ trigger:
 
 pool: Default
 
+
 steps:
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      [System.Environment]::SetEnvironmentVariable('NODE_EXTRA_CA_CERTS', 'C:\selfsigned-w-san.cer', [System.EnvironmentVariableTarget]::Machine)
+
+
 - task: FortifyScanCentralSAST@7
   inputs:
     scanCentralClientToken: '$(ScanCentral.ClientToken)'
