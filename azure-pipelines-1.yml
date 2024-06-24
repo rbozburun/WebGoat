@@ -9,8 +9,18 @@ trigger:
 pool: Default
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: FortifyScanCentralSAST@7
+  inputs:
+    scanCentralCtrlUrl: 'https://fortify.cw:4443/scancentral-ctrl'
+    scanCentralClientToken: '$(ScanCentral.ClientToken)'
+    sscUrl: 'https://fortify.cw:8443/ssc/'
+    sscCiToken: '$(ScanCentral.SscCiToken)'
+    uploadToSSC: true
+    applicationIdentifierType: 'byId'
+    applicationVersionId: '10000'
+    buildFailureCriteria: '[fortify priority order]:critical or [fortify priority order]:high'
+    taskResultForBuildFailureCriteria: 'FAIL'
+    buildTool: 'mvn'
   
 
 
