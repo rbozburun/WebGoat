@@ -12,18 +12,15 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
   
-- task: FortifySCA@7
+- task: FortifyScanCentralSAST@7
   inputs:
-    applicationType: 'java'
-    buildSourceVersion: '17'
-    fortifyBuildId: 'WebGoat4SCSAST'
-    scaVerbose: true
-    scaDebug: true
-    fortifyScanType: 'LocalScan'
-    runFortifyUpload: true
-    fortifyServerName: 'Fortify-SSC'
-    fortifyApplicationIdentifierType: 'byId'
-    fortifyApplicationVersionId: '10000'
-    fortifyBuildFailureCriteria: '[fortify priority order]:critical or [fortify priority order]:high'
+    scanCentralClientToken: '$(ScanCentral.ClientToken)'
+    sscUrl: 'https://fortify.cw:8443/ssc/'
+    sscCiToken: '$(ScanCentral.SscCiToken)'
+    uploadToSSC: true
+    applicationIdentifierType: 'byId'
+    applicationVersionId: '10000'
+    buildFailureCriteria: '[fortify priority order]:critical or [fortify priority order]:high'
     taskResultForBuildFailureCriteria: 'FAIL'
+    buildTool: 'mvn'
 
