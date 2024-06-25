@@ -6,7 +6,7 @@
 trigger:
 - main
 
-pool: Default
+pool: 13.162
 
 steps:
 - script: echo Hello, world!
