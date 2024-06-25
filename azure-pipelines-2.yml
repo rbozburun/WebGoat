@@ -13,4 +13,20 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: 'scancentral -sscurl https://fortify.cw:8443/ssc -ssctoken 07f6ee7d-3d2c-4d0a-b875-36ca9c673cc0 start ‑upload -versionid 10013 -uptoken 07f6ee7d-3d2c-4d0a-b875-36ca9c673cc0 -b react_login_default -scan -v'
+    script: |
+      Write-Host "Executing scancentral job and capturing job token..."
+      
+      $output = scancentral -sscurl https://fortify.cw:8443/ssc -ssctoken 07f6ee7d-3d2c-4d0a-b875-36ca9c673cc0 start ‑upload -versionid 10016 -uptoken 07f6ee7d-3d2c-4d0a-b875-36ca9c673cc0 -b CoreApp -scan
+
+      # Define a regular expression pattern to match "job token: <token>"
+      $pattern = '"Submitted job and received token: (\S+)"'
+
+      # Use the -match operator to find the token in the output
+      if ($output -match $pattern) {
+          # The token is captured in the first capturing group
+          $token = $matches[1]
+          Write-Output "Captured token: $token"
+      } else {
+          Write-Output "No token found in the output."
+      }
+    
